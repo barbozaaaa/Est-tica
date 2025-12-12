@@ -1,5 +1,5 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import Hero from './components/Hero'
 import Services from './components/Services'
 import About from './components/About'
@@ -24,6 +24,21 @@ function Home() {
 }
 
 function App() {
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    // Detectar hash routes e redirecionar
+    if (location.hash) {
+      const hash = location.hash.substring(1) // Remove o #
+      
+      if (hash === 'admin') {
+        navigate('/admin', { replace: true })
+      }
+      // Adicione outros hash routes aqui se necessário
+    }
+  }, [location.hash, navigate])
+
   return (
     <div className="App">
       <Routes>
