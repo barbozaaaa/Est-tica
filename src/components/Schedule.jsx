@@ -45,8 +45,8 @@ const Schedule = () => {
         throw new Error('Por favor, preencha todos os campos obrigatórios.')
       }
 
-      // Salvar no CRM (localStorage)
-      const appointment = saveAppointment({
+      // Salvar no Firebase
+      const appointment = await saveAppointment({
         name: formData.name,
         phone: formData.phone,
         email: formData.email || 'Não informado',

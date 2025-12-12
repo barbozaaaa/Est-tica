@@ -10,26 +10,40 @@ const Admin = () => {
     loadAppointments()
   }, [])
 
-  const loadAppointments = () => {
-    const apts = getAppointments()
-    // Ordenar por data mais recente primeiro
-    apts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    setAppointments(apts)
+  const loadAppointments = async () => {
+    try {
+      const apts = await getAppointments()
+      // Ordenar por data mais recente primeiro
+      apts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      setAppointments(apts)
+    } catch (error) {
+      console.error('Erro ao carregar agendamentos:', error)
+    }
   }
 
   const filteredAppointments = filter === 'all' 
     ? appointments 
     : appointments.filter(apt => apt.status === filter)
 
-  const handleStatusChange = (id, newStatus) => {
-    updateAppointmentStatus(id, newStatus)
-    loadAppointments()
+  const handleStatusChange = async (id, newStatus) => {
+    try {
+      await updateAppointmentStatus(id, newStatus)
+      loadAppointments()
+    } catch (error) {
+      console.error('Erro ao atualizar status:', error)
+      alert('Erro ao atualizar status do agendamento')
+    }
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm('Tem certeza que deseja excluir este agendamento?')) {
-      deleteAppointment(id)
-      loadAppointments()
+      try {
+        await deleteAppointment(id)
+        loadAppointments()
+      } catch (error) {
+        console.error('Erro ao deletar agendamento:', error)
+        alert('Erro ao excluir agendamento')
+      }
     }
   }
 
