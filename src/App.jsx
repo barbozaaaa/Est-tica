@@ -28,14 +28,16 @@ function App() {
   const location = useLocation()
 
   useEffect(() => {
-    // Detectar hash routes e redirecionar
+    // Detectar hash routes e redirecionar para o painel admin
     if (location.hash) {
-      const hash = location.hash.substring(1) // Remove o #
+      const hash = location.hash.substring(1).toLowerCase() // Remove o # e converte para minúsculo
       
-      if (hash === 'admin') {
+      // Aceita diferentes variações do hash para admin
+      if (hash === 'admin' || hash === 'esteticavercel' || hash === 'crm' || hash === 'painel') {
+        // Limpar o hash da URL e redirecionar para /admin
+        window.history.replaceState(null, '', '/admin')
         navigate('/admin', { replace: true })
       }
-      // Adicione outros hash routes aqui se necessário
     }
   }, [location.hash, navigate])
 
