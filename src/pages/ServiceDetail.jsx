@@ -73,7 +73,7 @@ const ServiceDetail = () => {
 
   const handleSubmitSchedule = (e) => {
     e.preventDefault()
-    const phoneNumber = '5511999999999' // ATUALIZE COM SEU NÚMERO REAL
+    const phoneNumber = '5511945085081' // +55 11 94508-5081
     const message = encodeURIComponent(
       `Olá Thaffny! Gostaria de agendar ${service.title}.\n\n` +
       `Nome: ${clientName}\n` +

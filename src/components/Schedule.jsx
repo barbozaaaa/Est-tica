@@ -58,7 +58,7 @@ const Schedule = () => {
       })
 
       // Enviar também via WhatsApp
-      const phoneNumber = '5511999999999' // ATUALIZE COM SEU NÚMERO REAL
+      const phoneNumber = '5511945085081' // +55 11 94508-5081
       const whatsappMessage = encodeURIComponent(
         `Olá Thaffny! Gostaria de agendar um horário.\n\n` +
         `Nome: ${formData.name}\n` +
