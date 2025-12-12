@@ -35,6 +35,16 @@ const Admin = () => {
     }
   }
 
+  const handleReset = async (id) => {
+    try {
+      await updateAppointmentStatus(id, 'pending')
+      loadAppointments()
+    } catch (error) {
+      console.error('Erro ao resetar agendamento:', error)
+      alert('Erro ao resetar agendamento')
+    }
+  }
+
   const handleDelete = async (id) => {
     if (window.confirm('Tem certeza que deseja excluir este agendamento?')) {
       try {
@@ -179,22 +189,6 @@ const Admin = () => {
                 </div>
 
                 <div className="appointment-actions">
-                  {appointment.status !== 'completed' && appointment.status !== 'cancelled' && (
-                    <>
-                      <button 
-                        className="appointment-complete-btn"
-                        onClick={() => handleStatusChange(appointment.id, 'completed')}
-                      >
-                        Finalizado
-                      </button>
-                      <button 
-                        className="appointment-cancel-btn"
-                        onClick={() => handleStatusChange(appointment.id, 'cancelled')}
-                      >
-                        Cancelar
-                      </button>
-                    </>
-                  )}
                   <a 
                     href={`https://wa.me/${appointment.phone.replace(/\D/g, '')}`}
                     target="_blank"
@@ -203,12 +197,28 @@ const Admin = () => {
                   >
                     WhatsApp
                   </a>
+                  {appointment.status !== 'completed' && appointment.status !== 'cancelled' && (
+                    <button 
+                      className="appointment-complete-btn"
+                      onClick={() => handleStatusChange(appointment.id, 'completed')}
+                    >
+                      Finalizado
+                    </button>
+                  )}
                   <button 
                     className="appointment-delete"
                     onClick={() => handleDelete(appointment.id)}
                   >
                     Excluir
                   </button>
+                  {(appointment.status === 'completed' || appointment.status === 'cancelled') && (
+                    <button 
+                      className="appointment-reset-btn"
+                      onClick={() => handleReset(appointment.id)}
+                    >
+                      Reset
+                    </button>
+                  )}
                 </div>
               </div>
             ))
