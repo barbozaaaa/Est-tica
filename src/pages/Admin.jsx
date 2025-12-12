@@ -15,7 +15,11 @@ const Admin = () => {
       const apts = await getAppointments()
       // Ordenar por data mais recente primeiro
       apts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-      setAppointments(apts)
+      // Garantir que não há duplicatas
+      const uniqueAppointments = apts.filter((apt, index, self) => 
+        index === self.findIndex(a => a.id === apt.id)
+      )
+      setAppointments(uniqueAppointments)
     } catch (error) {
       console.error('Erro ao carregar agendamentos:', error)
     }
@@ -197,12 +201,28 @@ const Admin = () => {
                   >
                     WhatsApp
                   </a>
+                  {appointment.status === 'pending' && (
+                    <button 
+                      className="appointment-confirm-btn"
+                      onClick={() => handleStatusChange(appointment.id, 'confirmed')}
+                    >
+                      Confirmar
+                    </button>
+                  )}
                   {appointment.status !== 'completed' && appointment.status !== 'cancelled' && (
                     <button 
                       className="appointment-complete-btn"
                       onClick={() => handleStatusChange(appointment.id, 'completed')}
                     >
                       Finalizado
+                    </button>
+                  )}
+                  {appointment.status !== 'completed' && appointment.status !== 'cancelled' && (
+                    <button 
+                      className="appointment-cancel-btn"
+                      onClick={() => handleStatusChange(appointment.id, 'cancelled')}
+                    >
+                      Cancelar
                     </button>
                   )}
                   <button 
