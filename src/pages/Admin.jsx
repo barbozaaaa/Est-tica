@@ -179,16 +179,22 @@ const Admin = () => {
                 </div>
 
                 <div className="appointment-actions">
-                  <select
-                    value={appointment.status}
-                    onChange={(e) => handleStatusChange(appointment.id, e.target.value)}
-                    className="appointment-status-select"
-                  >
-                    <option value="pending">Pendente</option>
-                    <option value="confirmed">Confirmado</option>
-                    <option value="completed">Concluído</option>
-                    <option value="cancelled">Cancelado</option>
-                  </select>
+                  {appointment.status !== 'completed' && appointment.status !== 'cancelled' && (
+                    <>
+                      <button 
+                        className="appointment-complete-btn"
+                        onClick={() => handleStatusChange(appointment.id, 'completed')}
+                      >
+                        Finalizado
+                      </button>
+                      <button 
+                        className="appointment-cancel-btn"
+                        onClick={() => handleStatusChange(appointment.id, 'cancelled')}
+                      >
+                        Cancelar
+                      </button>
+                    </>
+                  )}
                   <a 
                     href={`https://wa.me/${appointment.phone.replace(/\D/g, '')}`}
                     target="_blank"
