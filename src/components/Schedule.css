@@ -1,0 +1,214 @@
+.schedule {
+  padding: 8rem 2rem;
+  background: linear-gradient(180deg, #fff8e7 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.schedule::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 30% 40%, rgba(255, 192, 203, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.schedule-container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.schedule-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.schedule-title {
+  font-size: 3.5rem;
+  color: #2c2c2c;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #d4af37 0%, #ffc0cb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.schedule-subtitle {
+  font-size: 1.3rem;
+  color: #5a5a5a;
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.schedule-form {
+  background: white;
+  padding: 4rem 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 192, 203, 0.2);
+}
+
+.schedule-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.schedule-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.schedule-form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.schedule-form-group label {
+  font-size: 1rem;
+  color: #4a4a4a;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.required {
+  color: #d4af37;
+  font-weight: 600;
+}
+
+.schedule-form-group input,
+.schedule-form-group select,
+.schedule-form-group textarea {
+  padding: 1rem 1.2rem;
+  font-size: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  border: 2px solid rgba(255, 192, 203, 0.3);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  background: #fafafa;
+  color: #2c2c2c;
+}
+
+.schedule-form-group input:focus,
+.schedule-form-group select:focus,
+.schedule-form-group textarea:focus {
+  outline: none;
+  border-color: #d4af37;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.schedule-form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23d4af37' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 3rem;
+}
+
+.schedule-form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.schedule-form-message {
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.schedule-form-message.error {
+  background: #fee;
+  color: #c33;
+  border: 2px solid #fcc;
+}
+
+.schedule-form-message.success {
+  background: #efe;
+  color: #3c3;
+  border: 2px solid #cfc;
+}
+
+.schedule-form-actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.schedule-form-submit {
+  padding: 1.3rem 4rem;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #d4af37 0%, #ffc0cb 100%);
+  color: white;
+  border-radius: 50px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.schedule-form-submit:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+}
+
+.schedule-form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.schedule-form-note {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #8a8a8a;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .schedule {
+    padding: 5rem 1.5rem;
+  }
+
+  .schedule-title {
+    font-size: 2.5rem;
+  }
+
+  .schedule-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .schedule-form {
+    padding: 2.5rem 2rem;
+  }
+
+  .schedule-form-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .schedule-form-submit {
+    width: 100%;
+    padding: 1.2rem 2rem;
+    font-size: 1.1rem;
+  }
+}
